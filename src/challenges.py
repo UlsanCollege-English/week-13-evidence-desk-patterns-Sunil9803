@@ -1,4 +1,4 @@
-"""Week 13 Homework: Evidence Desk Patterns.
+"""Week 1 Homework: Evidence Desk Patterns.
 
 Complete each function using the data structure pattern named in the docstring.
 
@@ -50,7 +50,7 @@ def valid_tags(tags: str) -> bool:
     """Return True if all bracket-style evidence tags are balanced."""
     stack = []
 
-    matching = {
+    pairs = {
         ")": "(",
         "]": "[",
         "}": "{",
@@ -62,13 +62,13 @@ def valid_tags(tags: str) -> bool:
         if char in openings:
             stack.append(char)
 
-        elif char in matching:
+        elif char in pairs:
             if not stack:
                 return False
 
             top = stack.pop()
 
-            if top != matching[char]:
+            if top != pairs[char]:
                 return False
 
     return len(stack) == 0
@@ -111,8 +111,8 @@ def largest_time_gap(times: list[int]) -> int:
 
     largest_gap = 0
 
-    for i in range(1, len(sorted_times)):
-        gap = sorted_times[i] - sorted_times[i - 1]
+    for i in range(len(sorted_times) - 1):
+        gap = sorted_times[i + 1] - sorted_times[i]
 
         if gap > largest_gap:
             largest_gap = gap
